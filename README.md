@@ -19,7 +19,7 @@ git clone https://github.com/filwaline/cookiecutter-python-clean-architecture.gi
 cookiecutter cookiecutter-python-clean-architecture
 ```
 
-Also check `{{ cookiecutter.service_name }}/makefile` for convenient command.
+Also check `{{ cookiecutter.project_name }}/makefile` for convenient command.
 
 ## Reference
 
