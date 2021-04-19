@@ -1,0 +1,26 @@
+version: "3.4"
+services:
+  app:
+    container_name: app
+    build:
+      context: "../"
+      dockerfile: "./docker/dockerfile"
+      target: development
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres
+      - DB_PASSWORD=abc123
+      - API_HOST=app
+      - PYTHONDONTWRITEBYTECODE=1
+    ports:
+      - "8000:8000"
+
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=allocation
+      - POSTGRES_PASSWORD=abc123
+    ports:
+      - "54321:5432"
