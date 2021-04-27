@@ -5,11 +5,11 @@ export DOCKER_BUILDKIT=1
 
 compose-all: compose-down compose-build compose-up compose-test
 
-compose-build:
+compose-build: poetry-export
 	docker-compose -f "./docker/docker-compose.yml" build
 
 compose-up:
-	docker-compose -f "./docker/docker-compose.yml" up -d app
+	docker-compose -f "./docker/docker-compose.yml" up -d
 
 compose-down:
 	docker-compose -f "./docker/docker-compose.yml" down --remove-orphans
@@ -55,3 +55,8 @@ poetry-test-all: poetry-setup
 
 poetry-test-unit: poetry-setup
 	poetry run pytest --cov={{ cookiecutter.service_name }} ./tests/unit
+
+poetry-export:
+	poetry update && \
+	poetry export -o "./docker/requirements.txt" && \
+	poetry export -o "./docker/requirements-dev.txt" --dev
